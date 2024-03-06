@@ -1,0 +1,352 @@
+Stack Overflow
+Products
+Log in
+Sign up
+	StackExchange.ready(function () { StackExchange.topbar.init(); });
+	StackExchange.scrollPadding.setPaddingTop(50, 10); 
+	Home
+PUBLIC
+Questions
+Tags
+Users
+Companies
+COLLECTIVES
+Explore Collectives
+TEAMS
+Stack Overflow for Teams – Start collaborating and sharing organizational knowledge.
+Create a free Team Why Teams?
+Installing Vundle for VIM
+Ask Question
+Asked 8 years, 6 months ago
+Modified 6 years, 7 months ago
+Viewed 27k times
+14
+I can't Install Vundle
+I've followed the instructions on GitHub;
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+and that's all... Here's the tree of cd .vim
+├── bundle
+│   └── Vundle.vim
+│       ├── autoload
+│       │   ├── vundle
+│       │   │   ├── config.vim
+│       │   │   ├── installer.vim
+│       │   │   └── scripts.vim
+│       │   └── vundle.vim
+│       ├── changelog.md
+│       ├── CONTRIBUTING.md
+│       ├── doc
+│       │   └── vundle.txt
+│       ├── LICENSE-MIT.txt
+│       ├── README.md
+│       └── test
+│           ├── files
+│           │   └── test.erl
+│           ├── minirc.vim
+│           └── vimrc
+└── $MYVIMRC
+7 directories, 13 files
+and in .vimrc
+set nocompatible               " be iMproved
+filetype off 
+in order to edit .vimrc I used in vim:
+:e $MYVIMRC
+Can you help get Vundle installed?
+vimvundle
+Share
+Improve this question
+Follow
+edited Mar 31, 2016 at 18:49
+nn0p
+1,17912
+12 silver badges
+28
+28 bronze badges
+asked Jan 3, 2015 at 1:36
+Javittoxs
+4712
+2 gold badges
+7
+7 silver badges
+18
+18 bronze badges
+You missed the rest of the installation. (i.e. the parts you put in your vimrc) – 
+FDinoff
+ Jan 3, 2015 at 1:58
+Add a comment
+Report this ad
+3 Answers
+Sorted by:
+Highest score (default)
+Trending (recent votes count more)
+Date modified (newest first)
+Date created (oldest first)
+20
+like @FDinoff said, you missed the stuff that should go in you .vimrc.
+here is how it could look like:
+" vundle {{{1
+" needed to run vundle (but i want this anyways)
+set nocompatible
+" vundle needs filtype plugins off
+" i turn it on later
+filetype plugin indent off
+syntax off
+" set the runtime path for vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+" start vundle environment
+call vundle#begin()
+" list of plugins {{{2
+" let Vundle manage Vundle (this is required)
+"old: Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+" to install a plugin add it here and run :PluginInstall.
+" to update the plugins run :PluginInstall! or :PluginUpdate
+" to delete a plugin remove it here and run :PluginClean
+" 
+" YOUR LIST OF PLUGINS GOES HERE LIKE THIS:
+Plugin 'bling/vim-airline'
+" add plugins before this
+call vundle#end()
+" now (after vundle finished) it is save to turn filetype plugins on
+filetype plugin indent on
+syntax on
+you can check out my .vimrc if you want (https://github.com/linluk/my-dot-files/blob/master/vimrc).
+as described in the comments you need to install plugins after adding them to your .vimrc
+steps to install a plugin
+add it to you .vimrc between call vundle#begin() and call vundle#end()
+save the .vimrc
+type <ESC>:PluginInstall<CR>
+to update the plugins
+type <ESC>:PluginInstall!<CR> or <ESC>:PluginUpdate<CR>
+to remove a plugin
+remove it from the .vimrc
+save the .vimrc
+type <ESC>:PluginClean<CR>
+Share
+Improve this answer
+Follow
+edited Apr 3, 2016 at 11:13
+answered Jan 5, 2015 at 10:51
+linluk
+1,65016
+16 silver badges
+33
+33 bronze badges
+What is the line " Plugin 'gmarik/Vundle.vim' " doing? What is it calling? – 
+BluePython
+ Mar 31, 2016 at 2:59
+1
+It seems like now it can be changed to "VundleVim/Vundle.vim" since the repository has moved. – 
+BluePython
+ Mar 31, 2016 at 4:24
+Add a comment
+0
+I did exactly the steps as @linluk described but when I open a file with vim i don't see a result of the new installed Plugins. Fore example I installed the "powerline" plugin which should return at the bottom of my vim screen a fancy looking status line, but when I open a new File is still looks as before. The only plugin which worked for me is "YCM" (YouCompleteMe), but I can't explain why it works for YCM and not for powerline or other plugins like ultisnips.
+Share
+Improve this answer
+Follow
+answered Jul 23, 2016 at 9:31
+headbanger
+711
+1 silver badge
+6
+6 bronze badges
+Did you run :PluginInstall command from inside vim after you added the plugin to your .vimrc? – 
+00prometheus
+ Oct 20, 2016 at 11:37
+1
+found out that I wanted to install a deprecated Plugin which didn't work properly. – 
+headbanger
+ Nov 19, 2016 at 15:17
+Add a comment
+-1
+If you have trouble with a Vundle install follow these steps:
+Remove vim files(eg:.vim,.vimrc etc) and vundle
+copy and paste code in your terminal install vundle
+if any problem arises during installation press ENTER
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ets-labs/python-vimrc/master/setup.sh)"
+Share
+Improve this answer
+Follow
+edited Nov 13, 2016 at 5:12
+jwpfox
+5,11411
+11 gold badges
+45
+45 silver badges
+42
+42 bronze badges
+answered Nov 12, 2016 at 12:45
+Vimm Rana
+862
+2 silver badges
+10
+10 bronze badges
+Add a comment
+Your Answer
+Sign up or log in
+ Sign up using Google
+ Sign up using Facebook
+ Sign up using Email and Password
+Post as a guest
+Name
+Email
+Required, but never shown
+Post Your Answer
+By clicking “Post Your Answer”, you agree to our terms of service and acknowledge that you have read and understand our privacy policy and code of conduct.
+Not the answer you're looking for? Browse other questions tagged vimvundle or ask your own question.
+The Overflow Blog
+Developers use AI tools, they just don’t trust them (Ep. 586)
+Why knowledge management is foundational to AI success
+Featured on Meta
+Starting the Prompt Design Site: A New Home in our Stack Exchange Neighborhood
+Colors update: A more detailed look
+Testing native, sponsored banner ads on Stack Overflow (starting July 6)
+Temporary policy: Generative AI (e.g., ChatGPT) is banned
+13 people chatting
+Related
+17
+Vundle for VIM is not working on Ubuntu
+2
+Configuration doesn't work for using vundle on vim
+6
+Fresh Vim install, Vim permission errors, Vundle not functional
+2
+Vundle not installing properly
+0
+How to Configure Plugins while installing Vundle plugin for vim?
+0
+Installing vim plugin vundle fails on fresh install
+3
+Vundle does not install vim plugins
+0
+Vundle Vim not installing plugins
+0
+vim: execute Vundle install from command line
+3
+Vim Vundle installation on windows: unknown function vundle#begin
+Hot Network Questions
+File tree expander arrow directions
+Can I contact the editor with relevant personal information in hope to speed-up the review process?
+Can ultraproducts avoid all "factor structures"?
+How to start writing a research paper?
+Can I create a creature with a high Charisma score even if it can't speak?
+What type of anchor is this and how do I remove/replace/tighten it?
+Developing a Theoretical Quantum Effect and Experimental Methods for 'Heat Death' in a Science Fiction Universe
+Why would the Bank not withdraw all of the money for the check amount I wrote?
+How Did Old Testament Prophets "Earn Their Bread"?
+Draw the initial positions of Mölkky pins in ASCII art
+JVM bytecode instruction struct with serializer & parser
+Air that escapes from tire smells really bad
+Invitation to help writing and submitting papers -- how does this scam work?
+Can you use a charging IC to monitor charge and discharge current (or just charge?)
+What would a privileged/preferred reference frame look like if it existed?
+Should i refrigerate or freeze unopened canned food items?
+Remove horizontal spacing between \makebox and \dotfill
+Space elevator from Earth to Moon with multiple temporary anchors
+How can we compare expressive power between two Turing-complete languages?
+Can I ask a specific person to leave my defence meeting?
+Landmine detonation by air explosions?
+How Is Expansion of Space Distinguishable From Objects Moving Away
+GEE: Why era5 data doesn't have 31st of December?
+Burden of Proof for Reprinting a Book
+ Question feed
+    var cam = cam || { opt: {} };
+    var clcGamLoaderOptions = cam || { opt: {} };
+    var opt = clcGamLoaderOptions.opt;
+            opt.omni = 'BwoLCOD324vtkv87EAUY2uOdDSACKAI6DHx2aW18dnVuZGxlfEgAWhIJRBSprcypCgIRsl__FMXC8p_V1pywVaQ1IQow';
+        opt.refresh = !1;
+    opt.refreshInterval = 90;
+    opt.sf = !0;
+    opt.hb = !1;
+    opt.ll = !0;
+    opt.tlb_position = 0;
+    opt.personalization_consent = !1;
+    opt.targeting_consent = !1;
+    opt.performance_consent = !1;
+    opt.targeting = {Registered:['false'],'so-tag':['vim','vundle'],'tag-reportable':['vim','vundle'],NumberOfAnswers:['3']};
+    opt.adReportEnabled = !0;
+    opt.adReportUrl = '/ads/report-ad';
+    opt.adReportText = 'Report this ad';
+	opt.adReportFileTypeErrorMessage = 'Please select a PNG or JPG file.';
+    opt.adReportFileSizeErrorMessage = 'The file must be under 2 MiB.';
+	opt.adReportErrorText = 'Error uploading ad report.';
+	opt.adReportThanksText = 'Thanks for your feedback. We’ll review this against our code of conduct and take action if necessary.';
+    opt.adReportLoginExpiredMessage = 'Your login session has expired, please login and try again.';
+    opt.adReportLoginErrorMessage = 'An error occurred when loading the report form - please try again';
+	opt.adReportModalClass = 'js-ad-report';
+    opt.requestGuid = '1d0a2152-b701-4df5-bda8-f5f49a99beb1';
+    opt.targeting.TargetingConsent = ['False_Passive'];
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('dfptestads')) {
+        const dfptestads = urlParams.get('dfptestads');
+        opt.targeting.DfpTestAds = dfptestads;
+    }
+;(()=>{"use strict";var __webpack_modules__={23:(e,t,o)=>{o.d(t,{Z7:()=>l,eq:()=>r,kG:()=>n});const s=/^\/tags\//.test(location.pathname)||/^\/questions\/tagged\//.test(location.pathname)?"tag-pages":/^\/$/.test(location.pathname)||/^\/home/.test(location.pathname)?"home-page":"question-pages";let a=location.hostname;const i={slots:{lb:[[728,90]],mlb:[[728,90]],smlb:[[728,90]],bmlb:[[728,90]],sb:e=>"dfp-tsb"===e?[[300,250],[300,600]]:[[300,250]],"tag-sponsorship":[[730,135]],"mobile-below-question":[[320,50],[300,250]],msb:[[300,250],[300,600]],"talent-conversion-tracking":[[1,1]],"site-sponsorship":[[230,60]]},ids:{"dfp-tlb":"lb","dfp-mlb":"mlb","dfp-smlb":"smlb","dfp-bmlb":"bmlb","dfp-tsb":"sb","dfp-isb":"sb","dfp-tag":"tag-sponsorship","dfp-msb":"msb","dfp-sspon":"site-sponsorship","dfp-m-aq":"mobile-below-question"},idsToExcludeFromAdReports:["dfp-sspon"]};function n(){return Object.keys(i.ids)}function r(e){return i.idsToExcludeFromAdReports.indexOf(e)<0}function l(e){var t=e.split("_")[0];const o=i.ids[t];let n=i.slots[o];return"function"==typeof n&&(n=n(t)),{path:`/248424177/${a}/${o}/${s}`,sizes:n,zone:o}}},865:(e,t,o)=>{function s(e){return"string"==typeof e?document.getElementById(e):e}function a(e){return!!(e=s(e))&&"none"===getComputedStyle(e).display}function i(e){return!a(e)}function n(e){return!!e}function r(e){return/^\s*$/.test(s(e).innerHTML)}function l(e){const{style:t}=e;t.height=t.maxHeight=t.minHeight="auto",t.display="none"}function d(e){const{style:t}=e;t.height=t.maxHeight=t.minHeight="auto",t.display="none",[].forEach.call(e.children,d)}function c(e){const{style:t}=e;t.height=t.maxHeight=t.minHeight="auto",t.removeProperty("display")}function p(e){const t=document.createElement("script");t.src=e,document.body.appendChild(t)}function g(e){return o=e,(t=[]).push=function(e){return o(),delete this.push,this.push(e)},t;var t,o}function h(e){let t="function"==typeof HTMLTemplateElement;var o=document.createElement(t?"template":"div");return e=e.trim(),o.innerHTML=e,t?o.content.firstChild:o.firstChild}o.d(t,{$Z:()=>c,Bv:()=>h,Gx:()=>p,Nj:()=>s,QZ:()=>g,cf:()=>l,pn:()=>i,wo:()=>d,xb:()=>r,xj:()=>a,yb:()=>n})},763:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{t:()=>AdReports});var _common_helper__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__(865),_console__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__(276),_ad_units__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(23);class AdReports{constructor(e,t){if(this.googletag=e,this.cam=t,this.allowedFileTypes=["image/png","image/jpg","image/jpeg"],this.ignoreValidation=!1,_console__WEBPACK_IMPORTED_MODULE_1__.cM("Ad reporting init"),this.cam=t,this.callOnButtonClick=e=>this.onButtonClick(e),this.googletag.pubads().addEventListener("slotRenderEnded",e=>this.handleSlotRendered(e)),Array.isArray(t.slotsRenderedEvents)){_console__WEBPACK_IMPORTED_MODULE_1__.cM("Adding report button to "+t.slotsRenderedEvents.length+" events that have transpired");for(var o=0;o<t.slotsRenderedEvents.length;o++)this.handleSlotRendered(t.slotsRenderedEvents[o])}}handleSlotRendered(e){if(e&&e.slot&&!e.isEmpty&&(e.creativeId||e.lineItemId||!e.isEmpty)){var t=e.slot.getSlotElementId();if(t){var o=document.getElementById(t);if(o)if((0,_ad_units__WEBPACK_IMPORTED_MODULE_0__.eq)(t)){var s=o?.closest(".js-zone-container")?.querySelector(".js-report-ad-button-container");s.innerHTML="",s.append(this.createButton(e)),s.style.height="24px",_console__WEBPACK_IMPORTED_MODULE_1__.cM("Added report button to the bottom of "+t)}else _console__WEBPACK_IMPORTED_MODULE_1__.cM("Not adding report button to the bottom of "+t+": shouldHaveReportButton = false");else _console__WEBPACK_IMPORTED_MODULE_1__.cM("Not adding report button to the bottom of "+t+": resolved invalid adUnit element")}else _console__WEBPACK_IMPORTED_MODULE_1__.cM("Not adding report button to the bottom of element: invalid adUnitElementId")}else _console__WEBPACK_IMPORTED_MODULE_1__.cM("Not adding report button to the bottom of element: invalid SlotRenderEndedEvent")}async onButtonClick(e){e.preventDefault();let t=e.target;const o=t.dataset.modalUrl,s=t.dataset.googleEventData;return await this.loadModal(o,t,s),!1}createButton(e){let t=document.createElement("button");var o=JSON.stringify(e);return t.dataset.googleEventData=o,t.dataset.modalUrl=this.cam.opt.adReportUrl,t.dataset.adUnit=e.slot.getSlotElementId(),t.classList.add("js-report-ad","s-btn","s-btn__link","fs-fine","mt2","float-right"),t.append(document.createTextNode(this.cam.opt.adReportText)),t.removeEventListener("click",this.callOnButtonClick),t.addEventListener("click",this.callOnButtonClick),t}async loadModal(url,$link,googleEventData){try{await window.StackExchange.helpers.loadModal(url,{returnElements:window.$($link)}),this.initForm(googleEventData)}catch(e){var message="",response=e.responseText?eval(`(${e.responseText})`):null;message=response&&response.isLoggedOut?this.cam.opt.adReportLoginExpiredMessage:this.cam.opt.adReportLoginErrorMessage,window.StackExchange.helpers.showToast(message,{type:"danger"})}}removeModal(){window.StackExchange.helpers.closePopups(document.querySelectorAll("."+this.cam.opt.adReportModalClass),"dismiss")}initForm(e,t=!1){this.ignoreValidation=t,this.$form=document.querySelector(".js-ad-report-form"),this.$googleEventData=this.$form.querySelector(".js-json-data"),this.$adReportReasons=this.$form.querySelectorAll(".js-ad-report-reason"),this.$adReportReasonOther=this.$form.querySelector(".js-ad-report-reason-other"),this.$fileUploaderInput=this.$form.querySelector(".js-file-uploader-input"),this.$imageUploader=this.$form.querySelector(".js-image-uploader"),this.$clearImageUpload=this.$form.querySelector(".js-clear-image-upload"),this.$imageUploaderText=this.$form.querySelector(".js-image-uploader-text"),this.$imageUploaderPreview=this.$form.querySelector(".js-image-uploader-preview"),this.$fileErrorMessage=this.$form.querySelector(".js-file-error");const o=this.$form.querySelector(".js-drag-drop-enabled"),s=this.$form.querySelector(".js-drag-drop-disabled");this.$googleEventData.value=e,this.$adReportReasons.forEach((e,t)=>e.addEventListener("change",e=>{this.$adReportReasonOther.classList.toggle("d-none","3"!==e.target.value)})),this.$fileUploaderInput.addEventListener("change",()=>{this.validateFileInput()&&this.updateImagePreview(this.$fileUploaderInput.files)}),this.$clearImageUpload.addEventListener("click",e=>{e.preventDefault(),this.clearImageUpload()});try{this.$fileUploaderInput[0].value="",this.$imageUploader.addEventListener("dragenter dragover dragleave drop",this.preventDefaults),this.$imageUploader.addEventListener("dragenter dragover",this.handleDragStart),this.$imageUploader.addEventListener("dragleave drop",this.handleDragEnd),this.$imageUploader.addEventListener("drop",this.handleDrop)}catch(e){o.classList.add("d-none"),s.classList.remove("d-none")}this.$form.removeEventListener("",this.handleDragEnd),this.$form.addEventListener("submit",async e=>(e.preventDefault(),this.submitForm(),!1))}clearImageUpload(){this.$fileUploaderInput.value="",this.$imageUploaderPreview.setAttribute("src",""),this.$imageUploaderPreview.classList.add("d-none"),this.$clearImageUpload.classList.add("d-none"),this.$imageUploaderText.classList.remove("d-none"),this.$imageUploader.classList.add("p16","ba","bas-dashed","bc-black-100")}preventDefaults(e){e.preventDefault(),e.stopPropagation()}handleDragStart(e){this.$imageUploader.classList.remove("bas-dashed"),this.$imageUploader.classList.add("bas-solid","bc-black-100")}handleDragEnd(e){this.$imageUploader.classList.remove("bas-solid","bc-black-100"),this.$imageUploader.classList.add("bas-dashed")}handleDrop(e){var t=e.originalEvent.dataTransfer.files;FileReader&&t&&1===t.length&&(this.$fileUploaderInput.files=t,this.validateFileInput()&&this.updateImagePreview(t))}setError(e){this.$fileErrorMessage.parentElement.classList.toggle("has-error",e)}updateImagePreview(e){this.$imageUploader.classList.remove("p16","ba","bas-dashed","bc-black-100"),this.$clearImageUpload.classList.remove("d-none"),this.$imageUploaderText.classList.add("d-none");var t=new FileReader;t.onload=e=>{null!=e.target&&(this.$imageUploaderPreview.setAttribute("src",e.target.result),this.$imageUploaderPreview.classList.remove("d-none"))},t.readAsDataURL(e[0])}validateFileInput(){if(this.ignoreValidation)return!0;const e=this.cam.opt.adReportFileTypeErrorMessage,t=this.cam.opt.adReportFileSizeErrorMessage;if(null==this.$fileUploaderInput.files)return!1;var o=this.$fileUploaderInput.files[0];return null==o?(this.setError(!0),!1):this.allowedFileTypes.indexOf(o.type)<0?(this.$fileErrorMessage.textContent=e,this.$fileErrorMessage.classList.remove("d-none"),this.setError(!0),!1):o.size>2097152?(this.$fileErrorMessage.textContent=t,this.$fileErrorMessage.classList.remove("d-none"),this.setError(!0),!1):(this.$fileErrorMessage.classList.add("d-none"),this.setError(!1),!0)}async gatherDiagnosticInfo(){return{BrowserVersion:await this.getBrowserVersion()}}getElementSource(e){return e.outerHTML}getNestedIFrameElement(e){var t=e.querySelector("iframe");return t.contentDocument?t.contentDocument.documentElement:t.contentWindow.document.documentElement}async getBrowserVersion(){return await navigator.userAgentData.getHighEntropyValues(["fullVersionList"]).then(e=>JSON.stringify(e.fullVersionList))}async submitForm(){if(!this.validateFileInput())return!1;this.$form.querySelector("[type=submit]").setAttribute("disabled","true");var e=JSON.parse(this.$googleEventData.value||"{}");e.Reason=parseInt(this.$form.querySelector(".js-ad-report-reason:checked").value,10),e.Description=this.$adReportReasonOther.value,this.$googleEventData.value=JSON.stringify(e);var t=new FormData(this.$form);if("1"===t.get("shareDiagnosticInfo")){var o=await this.gatherDiagnosticInfo();Object.keys(o).forEach(e=>t.append(e,o[e]))}try{const e=await window.fetch(this.$form.getAttribute("action"),{method:this.$form.getAttribute("method"),body:t,cache:"no-cache"}),o=e.headers.get("content-type")||"",a=await e.text();if(!e.ok)throw new Error("response not valid");if(0===o.indexOf("text/html")){var s=(0,_common_helper__WEBPACK_IMPORTED_MODULE_2__.Bv)(a);const e=s?s.querySelector(".js-modal-content"):null;if(_console__WEBPACK_IMPORTED_MODULE_1__.cM("$popupContent"),_console__WEBPACK_IMPORTED_MODULE_1__.cM(e),!e)throw new Error(`Could not find .js-modal-content in response from ${this.$form.getAttribute("action")}`);document.querySelector(".js-modal-content").replaceWith(e)}else window.StackExchange.helpers.showToast(this.cam.opt.adReportThanksText,{type:"success"}),this.removeModal()}catch(e){window.StackExchange.helpers.showToast(this.cam.opt.adReportErrorText,{type:"danger"})}finally{let e=this.$form.querySelector("[type=submit]");e&&e.removeAttribute("disabled")}}}},276:(e,t,o)=>{function s(...e){}function a(...e){}o.d(t,{cM:()=>s,vU:()=>a})}},__webpack_module_cache__={};function __webpack_require__(e){var t=__webpack_module_cache__[e];if(void 0!==t)return t.exports;var o=__webpack_module_cache__[e]={exports:{}};return __webpack_modules__[e](o,o.exports,__webpack_require__),o.exports}__webpack_require__.d=(e,t)=>{for(var o in t)__webpack_require__.o(t,o)&&!__webpack_require__.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},__webpack_require__.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var __webpack_exports__={};(()=>{var e=__webpack_require__(276),t=(e=>(e[e.Above=0]="Above",e[e.Below=1]="Below",e))(t||{});const o=Object.assign({},{"lib":"https://cdn.sstatic.net/clc/js/bundles/gam_loader_script/gam_loader_script.bundle.741.17faee8eba9a98950467.min.js","style":null,"u":null,"wa":true,"kt":2000,"tto":true,"h":"clc.stackoverflow.com","allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(.*\\.googlesyndication)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$","wv":true,"al":false,"abd":true,"cpa_liid":[5882654614],"cpa_cid":[138377597667],"dp":false});var s=__webpack_require__(23),a=__webpack_require__(865),i=__webpack_require__(763);class n{constructor(t,o){this.googletag=t,this.interval=o,e.cM("Ad refresh init. interval: "+o),this.googletag.pubads().addEventListener("impressionViewable",e=>this.onImpressionViewable(e)),e.cM("done enabling ad refresh")}onImpressionViewable(t){var o=t.slot;e.cM("ad refresh - slot "+o.getSlotElementId()+" is viewable, initializing refresh"),this.scheduleRefresh(o)}scheduleRefresh(e){setTimeout(()=>this.refreshAdSlot(e),1e3*this.interval)}refreshAdSlot(t){var o=t.getSlotElementId();this.isElementVisibleInBrowser(o)?(e.cM("refreshing ad slot "+o),googletag.pubads().refresh([t])):(e.cM("refresh skipped this time; ad slot not viewable:"+o),this.scheduleRefresh(t))}isElementVisibleInBrowser(e){var t=document.getElementById(e);if(null!==t){var o=t.getBoundingClientRect();if(o.top>=0&&o.left>=0&&o.bottom<=(window.innerHeight||document.documentElement.clientHeight)&&o.right<=(window.innerWidth||document.documentElement.clientWidth))return!0}return!1}}window.cam=new class{constructor(){this.gptImported=!1,this.collapsed={},e.cM("constructor"),this.clc_options=o,window.clcGamLoaderOptions?Object.assign(this,window.clcGamLoaderOptions):void 0===this.opt&&(this.opt=window.opt)}init(){if(e.cM("init"),void 0===this.opt)throw new Error("opt not set, required by GAM Loader");e.cM("setup message handler"),window.addEventListener("message",e=>{this.onmessage(e)}),this.opt.targeting&&this.opt.targeting.ProductVariant&&"SystemDefault"===this.opt.targeting.ProductVariant[0]&&(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?this.opt.targeting.ProductVariant="Dark":this.opt.targeting.ProductVariant="Light")}handleSlotRenderedNoAdReport(){if(googletag.pubads().addEventListener("slotRenderEnded",e=>this.applyExtraMarginBottom(e)),Array.isArray(this.slotsRenderedEvents))for(var e=0;e<this.slotsRenderedEvents.length;e++)this.applyExtraMarginBottom(this.slotsRenderedEvents[e])}onmessage(t){let o="omni";if(t.data&&("string"==typeof t.data||t.data instanceof String)){if(0===t.data.indexOf("get-omni-")){e.cM("Recevied get-omni message, sending back omni");var s=t.source,i=this.opt.omni,n="string"==typeof i?i:"";s.postMessage([o,n,this.opt.requestGuid].join("|"),"*")}else if(0===t.data.indexOf("collapse-")){e.cM("Recevied collapse message, collapse ad iframe"),e.cM(t);for(var r=t.source.window,l=document.getElementsByTagName("IFRAME"),d=0;d<l.length;d++){var c=l[d];if(c.contentWindow==r)return void(0,a.wo)(c.parentElement.parentElement.parentElement)}}else if(0===t.data.indexOf("resize|")){e.cM("Recevied resize message, resize ad iframe"),e.cM(t);let o=this._getFrameByEvent(t),s=t.data.indexOf("|")+1,a=t.data.slice(s),i=parseFloat(a)+.5;e.cM("New iframe height "+i),o.height=i.toString(),o.parentElement.style.height=i.toString()+"px"}else if(0===t.data.indexOf("getmarkup|")){let o=t.data.indexOf("|")+1,s=t.data.slice(o);e.cM("Recevied get markup message: "+s);let a=this._getFrameByEvent(t).closest(".everyonelovesstackoverflow");const i=document.createElement("script");i.dataset.adZoneId=a.id,i.src=s,document.body.appendChild(i)}else if(0===t.data.indexOf("window-location|")){let o=t.data.indexOf("|")+1,s=t.data.slice(o);e.cM("Recevied window location message: "+s),s.startsWith("/")||(s="/"+s),window.open(window.location.protocol+"//"+window.location.host+s,"_blank")}}else e.cM("Received unhandled message")}_getFrameByEvent(e){return Array.from(document.getElementsByTagName("iframe")).filter(t=>t.contentWindow===e.source)[0]}classifyZoneIds(e){const t=e.map(a.Nj).filter(a.yb);return{eligible:t.filter(a.xb).filter(a.pn),ineligible:t.filter(a.xj)}}applyExtraMarginBottom(t){if(t&&t.slot&&!t.isEmpty&&(t.creativeId||t.lineItemId||!t.isEmpty)){var o=t.slot.getSlotElementId();if(o){var a=document.getElementById(o);if(a)if((0,s.eq)(o)){var i=a?.closest(".js-zone-container");i.style.marginBottom="24px",e.cM("Applied extra margin to the bottom of "+o)}else e.cM("Not applying extra margin to the bottom of "+o+": shouldHaveReportButton = false");else e.cM("Not applying extra margin to the bottom of "+o+": resolved invalid adUnit element")}else e.cM("Not applying extra margin to the bottom of element: invalid adUnitElementId")}else e.cM("Not applying extra margin to the bottom of element: invalid SlotRenderEndedEvent")}load(o=(0,s.kG)()){const r=this.opt.tlb_position===t.Above?["dfp-mlb","dfp-smlb"]:["dfp-mlb","dfp-smlb","dfp-tlb"];if(!this.isGptReady())return e.cM("Initializing..."),this.initGpt(),void googletag.cmd.push(()=>this.load(o));this.opt.adReportEnabled?(e.cM("Ad reporting enabled"),this.adReports=new i.t(googletag,this)):(e.cM("Ad reporting not enabled"),this.handleSlotRenderedNoAdReport()),this.opt.refresh?(e.cM("Ad refresh enabled"),this.adRefresh=new n(googletag,this.opt.refreshInterval)):e.cM("Ad refresh not enabled"),e.cM("Attempting to load ads into ids: ",o);const{eligible:l,ineligible:d}=this.classifyZoneIds(o);if(this.initDebugPanel(googletag,l.concat(d)),l.forEach(e=>(0,a.cf)(e)),d.forEach(a.wo),0===l.length)return void e.cM("Found no ad ids on page");e.cM("Eligible ids:",l),this.opt.abd&&this.appendAdblockDetector();var c=googletag.pubads().getSlots().filter(e=>o.indexOf(e.getSlotElementId())>=0);googletag.destroySlots(c),this.opt.sf&&(googletag.pubads().setForceSafeFrame(!0),googletag.pubads().setSafeFrameConfig({allowOverlayExpansion:!0,allowPushExpansion:!0,sandbox:!0})),e.cM("Targeting consent: Checking...");let p=!1,g=!1;void 0!==this.opt.targeting_consent&&(g=!0,e.cM("Targeting consent: Parameter set"),e.cM("Targeting consent: Consent given? ",this.opt.targeting_consent),p=this.opt.targeting_consent),void 0!==this.opt.personalization_consent&&(e.cM("Personalization consent: Parameter set"),e.cM("Personalization consent: Consent given? ",this.opt.personalization_consent),p=p&&this.opt.personalization_consent),p=p&&g,googletag.pubads().setRequestNonPersonalizedAds(p?0:1),p||googletag.pubads().setPrivacySettings({limitedAds:!0}),this.opt.ll||googletag.pubads().enableSingleRequest(),cam.sreEvent||(googletag.pubads().addEventListener("slotRenderEnded",e=>this.onSlotRendered(e)),cam.sreEvent=!0),this.setTargeting(googletag);var h=l.filter(e=>!this.opt.ll||r.indexOf(e.id)<0),m=l.filter(e=>!!this.opt.ll&&r.indexOf(e.id)>=0);e.cM("Up front ids:",h),e.cM("Lazy loaded ids:",m),h.forEach(t=>{e.cM(`Defining ad for element ${t.id}`),this.defineSlot(t.id,googletag),t.setAttribute("data-dfp-zone","true")}),googletag.enableServices(),h.forEach(t=>{e.cM(`Displaying ad for element ${t.id}`),googletag.cmd.push(()=>googletag.display(t.id))}),this.opt.ll&&(e.cM("Enabling lazy loading for GAM"),googletag.pubads().enableLazyLoad({fetchMarginPercent:0,renderMarginPercent:0}),e.cM("Setting up lazy loaded ad units"),m.forEach(t=>{e.cM(`Lazy loading - Defining Slot ${t.id}`),this.defineSlot(t.id,googletag)}),m.forEach(t=>{e.cM(`Lazy loading - Displaying ad for element ${t.id}`),googletag.cmd.push(()=>googletag.display(t.id))}))}setTargeting(t){let o=this.opt.targeting;if(!o)throw new Error("Targeting not defined");Object.keys(o).forEach(s=>{e.cM(`-> targeting - ${s}: ${o[s]}`),t.pubads().setTargeting(s,o[s])})}appendAdblockDetector(){const e=document.createElement("div");e.className="adsbox",e.id="clc-abd",e.style.position="absolute",e.style.pointerEvents="none",e.innerHTML="&nbsp;",document.body.appendChild(e)}onSlotRendered(o){try{const n=o.slot.getSlotElementId();let r=[];n||r.push("id=0");const l=document.getElementById(n);if(n&&!l&&r.push("el=0"),0!==r.length)return void this.stalled(r.join("&"));const{path:d,sizes:c,zone:p}=(0,s.Z7)(n);if(this.collapsed[p]&&o.isEmpty)return e.cM(`No line item for the element #${l.id}... collapsing.`),void(0,a.wo)(l);if(this.slotsRenderedEvents.push(o),o.lineItemId||o.creativeId||!o.isEmpty){e.cM(`Rendered ad for element #${l.id} [line item #${o.lineItemId}]`),e.cM(o);var i=l.parentElement;if(i.classList.contains("js-zone-container")){switch((0,a.cf)(i),n){case"dfp-tlb":this.opt.tlb_position===t.Above?i.classList.add("mb8"):i.classList.add("mt16");break;case"dfp-tag":i.classList.add("mb8");break;case"dfp-msb":i.classList.add("mt16");break;case"dfp-mlb":case"dfp-smlb":case"dfp-bmlb":i.classList.add("my8");break;case"dfp-isb":i.classList.add("mt24");break;case"dfp-m-aq":i.classList.add("my12"),i.classList.add("mx-auto")}(0,a.$Z)(i),(0,a.$Z)(l)}else e.cM(`No ad for element #${l.id}, collapsing`),e.cM(o),(0,a.wo)(l)}}catch(e){this.stalled("e=1")}}stalled(e){(new Image).src=`https://${this.clc_options.h}/stalled.gif?${e}`}defineSlot(t,o){"dfp-isb"===t&&(e.cM("-> targeting - Sidebar: Inline"),o.pubads().setTargeting("Sidebar",["Inline"])),"dfp-tsb"===t&&(e.cM("-> targeting - Sidebar: Right"),o.pubads().setTargeting("Sidebar",["Right"]));const{path:a,sizes:i,zone:n}=(0,s.Z7)(t);e.cM(`Defining slot for ${t}: ${a}, sizes: ${JSON.stringify(i)}`),o.defineSlot(a,i,t).addService(o.pubads())}importGptLibrary(){this.gptImported||(this.gptImported=!0,void 0===this.opt.targeting_consent||this.opt.targeting_consent?(0,a.Gx)("https://securepubads.g.doubleclick.net/tag/js/gpt.js"):(0,a.Gx)("https://pagead2.googlesyndication.com/tag/js/gpt.js"))}isGptReady(){return"undefined"!=typeof googletag&&!!googletag.apiReady}initGpt(){"undefined"==typeof googletag&&(window.googletag={cmd:(0,a.QZ)(()=>this.importGptLibrary())})}initDebugPanel(t,o){e.cM("initDebugPanel"),e.cM("Not showing debug panel")}},window.clcGamLoaderOptions&&(cam.init(),cam.load())})()})();STACK OVERFLOW
+Questions
+Help
+PRODUCTS
+Teams
+Advertising
+Collectives
+Talent
+COMPANY
+About
+Press
+Work Here
+Legal
+Privacy Policy
+Terms of Service
+Contact Us
+Cookie Settings
+Cookie Policy
+STACK EXCHANGE NETWORK
+Technology
+Culture & recreation
+Life & arts
+Science
+Professional
+Business
+API
+Data
+Blog
+Facebook
+Twitter
+LinkedIn
+Instagram
+Site design / logo © 2023 Stack Exchange Inc; user contributions licensed under CC BY-SA. rev 2023.7.5.43524
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+            
+            StackExchange.ready(function() {
+                var ga3Settings = {
+                    autoLink: ["stackoverflow.blog","info.stackoverflowsolutions.com","stackoverflowsolutions.com"],
+                    sendTitles: true,
+                    tracker: window.ga,
+                    trackingCodes: [
+                        'UA-108242619-1'
+                    ],
+                    checkDimension: 'dimension42'
+                                                    };
+                var customGA4Dimensions = {};
+                var ga4Settings = {
+                    tracker: gtag,
+                    trackingCodes: [
+                        'G-WCZ03SZFCQ'
+                    ],
+                    consentsToPerformanceCookies: "denied",
+                    consentsToTargetingCookies: "denied",
+                    eventParameters: customGA4Dimensions,
+                    checkForAdBlock: true
+                };
+                StackExchange.ga.init({ GA3: ga3Settings, GA4: ga4Settings });
+                StackExchange.ga.setDimension('dimension2', '|vim|vundle|');
+                StackExchange.ga.setDimension('dimension3', 'Questions/Show');
+                StackExchange.ga.setDimension('dimension7', "1688662345.1862054151");
+                StackExchange.ga.trackPageView();
+            });
+        Your privacy
+By clicking “Accept all cookies”, you agree Stack Exchange can store cookies on your device and disclose information in accordance with our Cookie Policy.
+Accept all cookies
+Necessary cookies only
+Customize settings 
