@@ -120,7 +120,7 @@ export class OpenAiService {
         model: model || this.config.GPT_MODEL,
         messages,
         temperature: this.config.temperature,
-      });
+      }) as any;
     } catch (error) {
       if (error.response) {
         console.error(error.response.status);
@@ -166,7 +166,7 @@ export class OpenAiService {
         model: modelToUse,
         messages,
         temperature: this.config.temperature,
-      });
+      }) as any;
     } catch (error) {
       if (error.response) {
         console.error(error.response.status);
