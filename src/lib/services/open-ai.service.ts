@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import 'multer';
 import { extractText } from '../functions/extract-text.function';
-import { CreateChatCompletionResponse, CreateEmbeddingResponseDataInner, OpenAIApi } from 'openai';
+import OpenAIApi from 'openai';
 import { encoding_for_model, TiktokenModel } from '@dqbd/tiktoken';
 import { createWriteStream } from 'node:fs';
 import similarity from 'compute-cosine-similarity';
 import { execPromise } from '@onivoro/server-process';
 import { OpenAiAnswer } from '../classes/open-ai-answer.class';
 import { OpenAiData } from '../classes/open-ai-data.class';
-import { AxiosResponse } from 'axios';
 import { ServerOpenAiConfig } from '../classes/server-open-ai-config.class';
 import { randomUUID as v4 } from 'node:crypto';
-
+import { APIPromise } from 'openai/core';
+import { ChatCompletion, Embedding } from 'openai/resources/index.mjs';
 @Injectable()
 export class OpenAiService {
   constructor(
@@ -107,7 +107,7 @@ export class OpenAiService {
   }
 
   async summarize(systemData: string, textToSummarize: string, model?: string): Promise<any> {
-    let response: AxiosResponse<CreateChatCompletionResponse, any>;
+    let response: APIPromise<ChatCompletion>;
     const messages = [
       {
         role: 'system' as any,
@@ -116,7 +116,7 @@ export class OpenAiService {
       { role: 'user', content: textToSummarize },
     ];
     try {
-      response = await this.openai.createChatCompletion({
+      response = await this.openai.chat.completions.create({
         model: model || this.config.GPT_MODEL,
         messages,
         temperature: this.config.temperature,
@@ -160,9 +160,9 @@ export class OpenAiService {
       },
       { role: 'user', content: message },
     ];
-    let response: AxiosResponse<CreateChatCompletionResponse, any>;
+    let response: APIPromise<ChatCompletion>;
     try {
-      response = await this.openai.createChatCompletion({
+      response = await this.openai.chat.completions.create({
         model: modelToUse,
         messages,
         temperature: this.config.temperature,
@@ -186,18 +186,19 @@ export class OpenAiService {
   }
 
   async genEmbeddings(input: string[]): Promise<OpenAiData[]> {
-    let embeddings: CreateEmbeddingResponseDataInner[];
+    let embeddings: Embedding[];
     let error: any;
     try {
-      const response = await this.openai.createEmbedding({
+      const response = await this.openai.embeddings.create({
         model: this.config.EMBEDDING_MODEL,
         input,
       });
 
-      embeddings = response.data?.data;
+      embeddings = response.data || [];
     } catch (e: any) {
       embeddings = [];
       error = e;
+      console.error(e);
     }
 
     return embeddings
@@ -258,7 +259,7 @@ export class OpenAiService {
     return normalizedLengthGroups;
   }
 
-  private embeddingToDataModel(text: string, embeddingResponse?: CreateEmbeddingResponseDataInner, error?: any) {
+  private embeddingToDataModel(text: string, embeddingResponse?: Embedding, error?: any) {
     const { embedding } = embeddingResponse || { embedding: [] };
 
     return {

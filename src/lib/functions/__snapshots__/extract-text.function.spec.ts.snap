@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`extractText parsing non-pdf files extracts the text (duh) 1`] = `
 "The 2023 National Memorial Day Parade, presented by Boeing, returns live to Constitution Avenue this Memorial Day, May 29. Join us in our nation’s capital as we honor the service and sacrifice of generations of Americans.
@@ -525,8 +525,8 @@ B
 BK-RO-001
 A
 BK-SB-003
-3/16\\"
-1/2\\"
+3/16"
+1/2"
 IMPORTANT NOTICE
 800-325-70089The Swan Corporation – Swanstone
 Installation Procedure
@@ -564,18 +564,18 @@ To prevent possible water (wicking affect) damage to the
 wall, the wall board must have a 1/2 inch gap above the
 shower floor flange, as shown in the illustration below.
 BK-WB-002
-1/2\\"
+1/2"
 IMPORTANT NOTICE
 Moisture
 Resistant
 Wallboard
 1/2”
 BK-SB-003
-3/16\\"
-1/2\\"
+3/16"
+1/2"
 BK-SB-003
-3/16\\"
-1/2\\"
+3/16"
+1/2"
 Existing
 Wall
 Surface
@@ -612,8 +612,8 @@ section in this manual.  The illustration below shows
 the ideal shower floor flange to existing wall surface
 gap of 3/16”.
 BK-SB-003
-3/16\\"
-1/2\\"
+3/16"
+1/2"
 Existing
 Wall
 Surface
@@ -630,8 +630,8 @@ Looking Down
 3/4” Filler Board for
 Shower Door Installation
 BK-SB-003
-3/16\\"
-1/2\\"
+3/16"
+1/2"
 Swanstone
 Wall Panel
 Moisture
@@ -664,11 +664,11 @@ the floor.  The top of the drain pipe must be 1/4”
 below the floor level.
 2.   Temporarily remove the shower floor and proceed
 with the installation instructions.
-1/4\\"
-2\\"
-6\\"
+1/4"
+2"
+6"
 BK-WB-002
-1/2\\"
+1/2"
 IMPORTANT NOTICE
 Swanstone
 Wall Panel

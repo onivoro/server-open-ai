@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { parse, resolve } from 'node:path';
-import pdf from 'pdf-parse';
+// this needs to be require cuz this package 'pdf-parse' is ultra hacky
+const pdf = require('pdf-parse');
+// and looks for a parent module to determine if it's in test mode
 const reader = require('any-text');
 
 export async function extractText(path: string): Promise<string> {

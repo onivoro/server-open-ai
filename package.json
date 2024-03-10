@@ -1,6 +1,6 @@
 {
     "name": "@onivoro/server-open-ai",
-    "version": "0.4.6",
+    "version": "4.0.0",
     "repository": {
         "url": "git+https://github.com/onivoro/server-open-ai.git"
     },
@@ -37,7 +37,6 @@
         "@types/multer": "^1.4.11",
         "@types/node": "18.19.1",
         "@types/pdf-parse": "^1.1.4",
-        "axios": "^1.6.7",
         "typescript": "*"
     },
     "engines": {
@@ -51,7 +50,7 @@
         "@onivoro/server-process": "^1.24.2",
         "any-text": "^1.2.0",
         "compute-cosine-similarity": "^1.1.0",
-        "openai": "^3.3.0",
+        "openai": "^4.28.4",
         "pdf-parse": "^1.1.1"
     }
 }
