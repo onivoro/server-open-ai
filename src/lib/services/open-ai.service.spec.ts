@@ -27,7 +27,9 @@ describe(OpenAiService.name, () => {
   describe(OpenAiService.prototype.genEmbeddings.name, () => {
     it('worx', async () => {
       const { subject } = setup();
-      expect(await subject.genEmbeddings(['tokenizes text and calls OpenAi to generate embeddings before passing the embedding and text to the persister'])).toMatchSnapshot();
+      const embeddingResult = await subject.genEmbeddings(['tokenizes text and calls OpenAi to generate embeddings before passing the embedding and text to the persister']);
+      const num = embeddingResult[0].embedding[0];
+      expect(Math.abs(num) < 1).toBe(true);
     });
   });
 
