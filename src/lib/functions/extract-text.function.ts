@@ -1,8 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { parse, resolve } from 'node:path';
 import pdf from 'pdf-parse';
-
-var reader = require('any-text');
+const reader = require('any-text');
 
 export async function extractText(path: string): Promise<string> {
   const { ext } = parse(path);
