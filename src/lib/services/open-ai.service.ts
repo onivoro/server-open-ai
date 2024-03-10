@@ -4,7 +4,7 @@ import { extractText } from '../functions/extract-text.function';
 import { CreateChatCompletionResponse, CreateEmbeddingResponseDataInner, OpenAIApi } from 'openai';
 import { encoding_for_model, TiktokenModel } from '@dqbd/tiktoken';
 import { createWriteStream } from 'node:fs';
-const similarity = require('compute-cosine-similarity');
+import similarity from 'compute-cosine-similarity';
 import { execPromise } from '@onivoro/server-process';
 import { OpenAiAnswer } from '../classes/open-ai-answer.class';
 import { OpenAiData } from '../classes/open-ai-data.class';
