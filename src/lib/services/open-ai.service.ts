@@ -185,6 +185,12 @@ export class OpenAiService {
     return answer;
   }
 
+  async genImage(prompt: string, quality: 'hd' | 'standard'= 'hd') {
+      const response = await this.openai.images.generate({prompt, quality, response_format: 'b64_json'});
+      const base64 = response.data[0].b64_json;
+      return `data:image/jpeg;base64,${base64}`
+  }
+
   async genEmbeddings(input: string[]): Promise<OpenAiData[]> {
     let embeddings: Embedding[];
     let error: any;
