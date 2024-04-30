@@ -1,6 +1,6 @@
 {
     "name": "@onivoro/server-open-ai",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "repository": {
         "url": "git+https://github.com/onivoro/server-open-ai.git"
     },
